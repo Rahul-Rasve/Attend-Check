@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "414012401897",
+    "project_id": "attend-check-15556",
+    "storage_bucket": "attend-check-15556.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414012401897:android:7937bb355c82f8b7fce878",
+        "android_client_info": {
+          "package_name": "com.rahul.attend_check"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414012401897-mptmmu568dngk9mjr8c5paejtdr349al.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWmtnk4161kzhvXLfoPGkBKdfUcZOUbT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414012401897-mptmmu568dngk9mjr8c5paejtdr349al.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
