@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:attend_check/resources/auth_services.dart';
+import 'package:attend_check/authentication/auth_services.dart';
 import 'package:flutter/material.dart';
 
 class VerifyEmailPage extends StatefulWidget {

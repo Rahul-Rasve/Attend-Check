@@ -1,7 +1,7 @@
 import 'package:attend_check/firebase_options.dart';
-import 'package:attend_check/resources/auth_exceptions.dart';
-import 'package:attend_check/resources/auth_provider.dart';
-import 'package:attend_check/resources/auth_user.dart';
+import 'package:attend_check/authentication/auth_exceptions.dart';
+import 'package:attend_check/authentication/auth_provider.dart';
+import 'package:attend_check/authentication/auth_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 

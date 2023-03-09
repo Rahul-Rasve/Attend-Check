@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'package:attend_check/constants.dart';
-import 'package:attend_check/resources/auth_exceptions.dart';
-import 'package:attend_check/resources/auth_services.dart';
+import 'package:attend_check/authentication/auth_exceptions.dart';
+import 'package:attend_check/authentication/auth_services.dart';
 import 'package:attend_check/utilities/routes.dart';
 import 'package:attend_check/widgets/dialog_box.dart';
 import 'package:flutter/material.dart';
@@ -128,27 +128,22 @@ class _LoginViewState extends State<LoginView> {
               ),
             ),
           ),
-          SizedBox(
-            height: 35.0,
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(context)
-                .pushNamedAndRemoveUntil(registerPage, (route) => false),
-            style: TextButton.styleFrom(
-              fixedSize: Size(150.0, 50.0),
-              backgroundColor: Colors.red,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Don't have an account?",
+                style: TextStyle(fontSize: 15.0),
               ),
-            ),
-            child: Text(
-              'SIGN UP',
-              style: TextStyle(
-                fontSize: 20.0,
-                letterSpacing: 2,
-                color: Colors.white,
+              TextButton(
+                onPressed: () => Navigator.of(context)
+                    .pushNamedAndRemoveUntil(registerPage, (route) => false),
+                child: Text(
+                  'Sign Up here',
+                  style: TextStyle(color: Colors.blue, fontSize: 15.0),
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),

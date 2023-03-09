@@ -1,6 +1,6 @@
-import 'package:attend_check/resources/auth_provider.dart';
-import 'package:attend_check/resources/auth_user.dart';
-import 'package:attend_check/resources/firebase_auth_provider.dart';
+import 'package:attend_check/authentication/auth_provider.dart';
+import 'package:attend_check/authentication/auth_user.dart';
+import 'package:attend_check/authentication/firebase_auth_provider.dart';
 
 class AuthService implements AuthProvider {
   final AuthProvider provider;

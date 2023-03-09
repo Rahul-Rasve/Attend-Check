@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'package:attend_check/constants.dart';
-import 'package:attend_check/resources/auth_services.dart';
-import 'package:attend_check/resources/auth_services.dart';
+import 'package:attend_check/authentication/auth_services.dart';
 import 'package:attend_check/utilities/routes.dart';
 import 'package:attend_check/widgets/input_field.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +52,7 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                 ),
           Container(
-            margin: EdgeInsets.symmetric(vertical: 30.0),
+            margin: EdgeInsets.symmetric(vertical: 20.0),
             child: Text(
               'Sign Up',
               style: TextStyle(
@@ -63,7 +62,7 @@ class _RegisterViewState extends State<RegisterView> {
             ),
           ),
           Container(
-            margin: EdgeInsets.all(20.0),
+            margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: Column(
               children: [
                 InputField(
@@ -115,7 +114,7 @@ class _RegisterViewState extends State<RegisterView> {
             },
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-              margin: EdgeInsets.symmetric(vertical: 10.0),
+              margin: EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(20.0),
@@ -129,6 +128,23 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
               ),
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Already have a account?",
+                style: TextStyle(fontSize: 15.0),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context)
+                    .pushNamedAndRemoveUntil(loginPage, (route) => false),
+                child: Text(
+                  'Login here',
+                  style: TextStyle(color: Colors.blue, fontSize: 15.0),
+                ),
+              ),
+            ],
           ),
         ],
       ),

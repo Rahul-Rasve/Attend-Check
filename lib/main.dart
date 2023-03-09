@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:attend_check/resources/auth_services.dart';
+import 'package:attend_check/authentication/auth_services.dart';
 import 'package:attend_check/screens/home_view.dart';
 import 'package:attend_check/screens/login_view.dart';
 import 'package:attend_check/screens/verify_email_view.dart';
@@ -29,13 +29,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: verifyEmailPage,
+      initialRoute: authPage,
       routes: {
         homePage: (context) => HomePage(),
         loginPage: (context) => KeyboardVisibilityProvider(child: LoginView()),
         registerPage: (context) =>
             KeyboardVisibilityProvider(child: RegisterView()),
         verifyEmailPage: (context) => VerifyEmailPage(),
+        authPage: (context) => AuthPage(),
       },
     );
   }

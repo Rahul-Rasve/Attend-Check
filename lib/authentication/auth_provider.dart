@@ -1,4 +1,4 @@
-import 'package:attend_check/resources/auth_user.dart';
+import 'package:attend_check/authentication/auth_user.dart';
 
 abstract class AuthProvider {
   AuthUser? get currentUser;
