@@ -109,8 +109,8 @@ class _RegisterViewState extends State<RegisterView> {
               ],
             ),
           ),
-          GestureDetector(
-            onTap: () async {
+          TextButton(
+            onPressed: () async {
               try {
                 if (userConfirmPassword.text == userPassword.text) {
                   await AuthService.firebase().register(
@@ -146,20 +146,13 @@ class _RegisterViewState extends State<RegisterView> {
                 );
               }
             },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-              margin: EdgeInsets.only(top: 10.0),
-              decoration: BoxDecoration(
-                color: primary,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: Text(
-                'SIGN UP',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white,
-                  letterSpacing: 2.0,
-                ),
+            style: buttonStyle(),
+            child: Text(
+              'SIGN UP',
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.white,
+                letterSpacing: 2.0,
               ),
             ),
           ),

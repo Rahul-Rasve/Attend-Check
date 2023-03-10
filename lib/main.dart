@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: userType,
+      initialRoute: authPage,
       routes: {
         homePage: (context) => HomePage(),
         loginPage: (context) => KeyboardVisibilityProvider(
@@ -70,9 +70,7 @@ class _AuthPageState extends State<AuthPage> {
               return VerifyEmailPage();
             }
           } else {
-            return KeyboardVisibilityProvider(
-              child: LoginView(),
-            );
+            return (!isTeacher && !isStudent) ? UserType() : LoginView();
           }
         } else {
           return Center(

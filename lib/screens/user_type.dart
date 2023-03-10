@@ -66,7 +66,7 @@ class _UserTypeState extends State<UserType> {
                             setState(() {
                               isTeacher = true;
                             });
-                            Navigator.of(context).pushNamed(loginPage);
+                            Navigator.of(context, rootNavigator: true,).popAndPushNamed(loginPage);
                           },
                           style: buttonStyle(),
                           child: Text(

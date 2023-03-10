@@ -135,13 +135,7 @@ class _LoginViewState extends State<LoginView> {
                 );
               }
             },
-            style: TextButton.styleFrom(
-              fixedSize: Size(150.0, 50.0),
-              backgroundColor: primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-            ),
+            style: buttonStyle(),
             child: Text(
               'LOGIN',
               style: TextStyle(

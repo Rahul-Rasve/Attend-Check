@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 const Color primary = Colors.red;
 const Color splashColor = Color.fromARGB(95, 255, 255, 255);
 
-bool? isTeacher;
-bool? isStudent;
+bool isTeacher = false;
+bool isStudent = false;
 
 ButtonStyle buttonStyle() {
   return ButtonStyle(
@@ -17,7 +17,7 @@ ButtonStyle buttonStyle() {
     elevation: MaterialStateProperty.all(5.0),
     shape: MaterialStateProperty.all(
       RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(20.0),
       ),
     ),
     overlayColor: MaterialStateColor.resolveWith(
