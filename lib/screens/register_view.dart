@@ -8,7 +8,6 @@ import 'package:attend_check/widgets/dialog_box.dart';
 import 'package:attend_check/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -18,9 +17,25 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  TextEditingController? userEmail;
-  TextEditingController? userPassword;
-  TextEditingController? userConfirmPassword;
+  late final TextEditingController userEmail;
+  late final TextEditingController userPassword;
+  late final TextEditingController userConfirmPassword;
+
+  @override
+  void initState() {
+    userEmail = TextEditingController();
+    userPassword = TextEditingController();
+    userConfirmPassword = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    userEmail = TextEditingController();
+    userPassword = TextEditingController();
+    userConfirmPassword = TextEditingController();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,10 +112,10 @@ class _RegisterViewState extends State<RegisterView> {
           GestureDetector(
             onTap: () async {
               try {
-                if (userConfirmPassword!.text == userPassword!.text) {
+                if (userConfirmPassword.text == userPassword.text) {
                   await AuthService.firebase().register(
-                    email: userEmail!.text,
-                    password: userPassword!.text,
+                    email: userEmail.text,
+                    password: userPassword.text,
                   );
 
                   AuthService.firebase().sendEmailVerification();

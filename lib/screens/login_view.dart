@@ -18,8 +18,22 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  TextEditingController? userEmail;
-  TextEditingController? userPassword;
+  late final TextEditingController userPassword;
+  late final TextEditingController userEmail;
+
+  @override
+  void initState() {
+    userEmail = TextEditingController();
+    userPassword = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    userEmail = TextEditingController();
+    userPassword = TextEditingController();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,8 +105,8 @@ class _LoginViewState extends State<LoginView> {
             onPressed: () async {
               try {
                 await AuthService.firebase().login(
-                  email: userEmail!.text,
-                  password: userPassword!.text,
+                  email: userEmail.text,
+                  password: userPassword.text,
                 );
 
                 final user = AuthService.firebase().currentUser;

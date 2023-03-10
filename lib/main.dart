@@ -64,7 +64,9 @@ class _AuthPageState extends State<AuthPage> {
               return VerifyEmailPage();
             }
           } else {
-            return LoginView();
+            return KeyboardVisibilityProvider(
+              child: LoginView(),
+            );
           }
         } else {
           return Center(
