@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:attend_check/authentication/auth_services.dart';
+import 'package:attend_check/constants.dart';
 import 'package:attend_check/screens/home_view.dart';
 import 'package:attend_check/screens/login_view.dart';
+import 'package:attend_check/screens/user_type.dart';
 import 'package:attend_check/screens/verify_email_view.dart';
 import 'package:attend_check/utilities/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,14 +31,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: authPage,
+      initialRoute: userType,
       routes: {
         homePage: (context) => HomePage(),
-        loginPage: (context) => KeyboardVisibilityProvider(child: LoginView()),
-        registerPage: (context) =>
-            KeyboardVisibilityProvider(child: RegisterView()),
+        loginPage: (context) => KeyboardVisibilityProvider(
+              child: LoginView(),
+            ),
+        registerPage: (context) => KeyboardVisibilityProvider(
+              child: RegisterView(),
+            ),
         verifyEmailPage: (context) => VerifyEmailPage(),
         authPage: (context) => AuthPage(),
+        userType: (context) => UserType(),
       },
     );
   }
@@ -71,7 +77,7 @@ class _AuthPageState extends State<AuthPage> {
         } else {
           return Center(
             child: CircularProgressIndicator(
-              color: Colors.red,
+              color: primary,
             ),
           );
         }

@@ -150,7 +150,7 @@ class _RegisterViewState extends State<RegisterView> {
               padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
               margin: EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: primary,
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Text(

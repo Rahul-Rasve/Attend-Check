@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:attend_check/constants.dart';
 import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget {
@@ -24,7 +25,7 @@ class InputField extends StatelessWidget {
       onSubmitted: (value) => FocusScope.of(context).unfocus(),
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       keyboardType: inputType,
-      cursorColor: Colors.red,
+      cursorColor: primary,
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 20.0,

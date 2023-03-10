@@ -1,3 +1,5 @@
+import 'package:attend_check/authentication/auth_services.dart';
+import 'package:attend_check/utilities/routes.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,6 +12,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Center(
+        child: TextButton(
+          onPressed: ()async {
+            await AuthService.firebase().logout();
+            Navigator.of(context).pushNamedAndRemoveUntil(loginPage, (route) => false);
+          },
+          child: Text('logout'),
+        ),
+      ),
+    );
   }
 }
