@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
+import 'package:attend_check/authentication/auth_exceptions.dart';
 import 'package:attend_check/constants.dart';
 import 'package:attend_check/authentication/auth_services.dart';
 import 'package:attend_check/utilities/routes.dart';
+import 'package:attend_check/widgets/dialog_box.dart';
 import 'package:attend_check/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -103,12 +105,29 @@ class _RegisterViewState extends State<RegisterView> {
 
                   AuthService.firebase().sendEmailVerification();
 
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      verifyEmailPage, (route) => false);
+                  Navigator.of(context).pushNamed(verifyEmailPage);
+                } else {
+                  showErrorDialog(context, 'Passwords don\'t match!');
                 }
-              } on Exception catch (_) {
-                Fluttertoast.showToast(
-                  msg: 'Failed to register!',
+              } on WeakPasswordAuthException catch (_) {
+                await showErrorDialog(
+                  context,
+                  'Weak Password',
+                );
+              } on EmailAlreadyInUseAuthException catch (_) {
+                await showErrorDialog(
+                  context,
+                  'Email already in use, try signing in.',
+                );
+              } on InvalidEmailAuthException catch (_) {
+                await showErrorDialog(
+                  context,
+                  'Invalid Email!',
+                );
+              } on GenericAuthException catch (_) {
+                await showErrorDialog(
+                  context,
+                  'Failed to register!',
                 );
               }
             },

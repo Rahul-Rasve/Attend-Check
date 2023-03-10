@@ -42,6 +42,8 @@ class FirebaseAuthProvider implements AuthProvider {
       } else {
         throw GenericAuthException();
       }
+    } catch (_){
+      throw GenericAuthException();
     }
   }
 
@@ -73,6 +75,8 @@ class FirebaseAuthProvider implements AuthProvider {
       } else {
         throw GenericAuthException();
       }
+    } catch (_){
+      throw GenericAuthException();
     }
   }
 
@@ -91,5 +95,16 @@ class FirebaseAuthProvider implements AuthProvider {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform
     );
+  }
+  
+  @override
+  Future<void> logout() async{
+    final user = currentUser;
+    if(user != null){
+      await FirebaseAuth.instance.signOut();
+    }
+    else{
+      throw UserNotLoggedInAuthException();
+    }
   }
 }

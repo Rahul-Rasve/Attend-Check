@@ -105,11 +105,20 @@ class _LoginViewState extends State<LoginView> {
                       verifyEmailPage, (route) => false);
                 }
               } on UserNotFoundAuthException catch (_) {
-                showErrorDialog(context, 'User not found!');
-              } on WeakPasswordAuthException catch (_) {
-                showErrorDialog(context, 'Wrong password! Try again.');
+                await showErrorDialog(
+                  context,
+                  'User not found!',
+                );
+              } on WrongPasswordAuthException catch (_) {
+                await showErrorDialog(
+                  context,
+                  'Wrong password! Try again.',
+                );
               } on GenericAuthException catch (_) {
-                showErrorDialog(context, 'Authentication Error!');
+                await showErrorDialog(
+                  context,
+                  'Authentication Error!',
+                );
               }
             },
             style: TextButton.styleFrom(

@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Attend Check',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       initialRoute: authPage,
       routes: {
@@ -55,24 +55,23 @@ class _AuthPageState extends State<AuthPage> {
     return FutureBuilder(
       future: AuthService.firebase().initialize(),
       builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.done:
-            final user = AuthService.firebase().currentUser;
-            if (user != null) {
-              if (user.isEmailVerified) {
-                return HomePage();
-              } else {
-                return VerifyEmailPage();
-              }
+        if (snapshot.connectionState == ConnectionState.done) {
+          final user = AuthService.firebase().currentUser;
+          if (user != null) {
+            if (user.isEmailVerified) {
+              return HomePage();
             } else {
-              return LoginView();
+              return VerifyEmailPage();
             }
-          default:
-            return Center(
-              child: CircularProgressIndicator(
-                color: Colors.red,
-              ),
-            );
+          } else {
+            return LoginView();
+          }
+        } else {
+          return Center(
+            child: CircularProgressIndicator(
+              color: Colors.red,
+            ),
+          );
         }
       },
     );

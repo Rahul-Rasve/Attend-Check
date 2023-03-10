@@ -61,7 +61,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
               height: 50.0,
             ),
             TextButton(
-              onPressed: () async {},
+              onPressed: () async => AuthService.firebase().logout(),
               style: TextButton.styleFrom(
                 fixedSize: Size(150.0, 50.0),
                 backgroundColor: Colors.red,
