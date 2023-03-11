@@ -61,7 +61,7 @@ class _LoginViewState extends State<LoginView> {
                   child: Center(
                     child: Icon(
                       Icons.person_pin_rounded,
-                      color: Colors.white,
+                      color: secondary,
                       size: screenHeight / 7,
                     ),
                   ),
@@ -156,7 +156,7 @@ class _LoginViewState extends State<LoginView> {
               style: TextStyle(
                 fontSize: 20.0,
                 letterSpacing: 2,
-                color: Colors.white,
+                color: secondary,
               ),
             ),
           ),

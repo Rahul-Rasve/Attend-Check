@@ -63,7 +63,7 @@ class _RegisterViewState extends State<RegisterView> {
                   child: Center(
                     child: Icon(
                       Icons.person_pin_rounded,
-                      color: Colors.white,
+                      color: secondary,
                       size: screenHeight / 7,
                     ),
                   ),
@@ -178,7 +178,7 @@ class _RegisterViewState extends State<RegisterView> {
               'SIGN UP',
               style: TextStyle(
                 fontSize: 20.0,
-                color: Colors.white,
+                color: secondary,
                 letterSpacing: 2.0,
               ),
             ),

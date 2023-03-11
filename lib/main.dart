@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'JosefinSans',
         primarySwatch: Colors.red,
       ),
-      initialRoute: authPage,
+      initialRoute: homePage,
       routes: {
         homePage: (context) => HomePage(),
         loginPage: (context) => KeyboardVisibilityProvider(

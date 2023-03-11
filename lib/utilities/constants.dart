@@ -3,10 +3,15 @@
 import 'package:flutter/material.dart';
 
 const Color primary = Colors.red;
+const Color secondary = Colors.white;
+const Color blackColor = Colors.black;
 const Color splashColor = Color.fromARGB(95, 255, 255, 255);
 
 bool isTeacher = false;
 bool isStudent = false;
+bool isCalendarSelected = false;
+bool isAttendanceSelected = false;
+bool isProfileSelected = false;
 
 ButtonStyle buttonStyle() {
   return ButtonStyle(

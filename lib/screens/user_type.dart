@@ -30,7 +30,7 @@ class _UserTypeState extends State<UserType> {
             child: Center(
               child: Icon(
                 Icons.people_alt_rounded,
-                color: Colors.white,
+                color: secondary,
                 size: screenHeight / 7,
               ),
             ),
@@ -72,7 +72,7 @@ class _UserTypeState extends State<UserType> {
                           child: Text(
                             'Teacher Login',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: secondary,
                               fontSize: 22.0,
                             ),
                           ),
@@ -91,7 +91,7 @@ class _UserTypeState extends State<UserType> {
                           child: Text(
                             'Student Login',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: secondary,
                               fontSize: 22.0,
                             ),
                           ),

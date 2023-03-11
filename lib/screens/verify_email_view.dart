@@ -31,7 +31,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
             child: Center(
               child: Icon(
                 Icons.mark_email_unread_outlined,
-                color: Colors.white,
+                color: secondary,
                 size: screenHeight / 7,
               ),
             ),
@@ -75,7 +75,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                     'Send Verification Email',
                     style: TextStyle(
                       fontSize: 20.0,
-                      color: Colors.white,
+                      color: secondary,
                     ),
                   ),
                 ),
@@ -99,7 +99,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                     'Sign Out',
                     style: TextStyle(
                       fontSize: 20.0,
-                      color: Colors.white,
+                      color: secondary,
                     ),
                   ),
                 ),
