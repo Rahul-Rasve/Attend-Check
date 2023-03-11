@@ -11,6 +11,7 @@ class InputField extends StatelessWidget {
     required this.inputType,
     required this.hintText,
     this.iconData,
+    this.maxLength,
   });
 
   final TextEditingController? controllerName;
@@ -18,6 +19,7 @@ class InputField extends StatelessWidget {
   final TextInputType? inputType;
   final String? hintText;
   final IconData? iconData;
+  final int? maxLength;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +31,12 @@ class InputField extends StatelessWidget {
       keyboardType: inputType,
       cursorColor: primary,
       textAlign: TextAlign.center,
+      maxLength: maxLength,
       style: TextStyle(
         fontSize: 20.0,
       ),
       decoration: InputDecoration(
+        counterText: '', //to hide the maxLength value
         hintText: hintText,
         prefixIcon: Icon(
           iconData,

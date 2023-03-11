@@ -107,6 +107,7 @@ class _RegisterViewState extends State<RegisterView> {
                     hintText: 'Enter your Password',
                     inputType: TextInputType.text,
                     iconData: Icons.lock_person_outlined,
+                    maxLength: 10,
                   ),
                 ),
                 SizedBox(
@@ -123,6 +124,7 @@ class _RegisterViewState extends State<RegisterView> {
                     hintText: 'Confirm your Password',
                     inputType: TextInputType.text,
                     iconData: Icons.lock_person_outlined,
+                    maxLength: 10,
                   ),
                 ),
               ],
@@ -186,14 +188,18 @@ class _RegisterViewState extends State<RegisterView> {
             children: [
               Text(
                 "Already have a account?",
-                style: TextStyle(fontSize: 15.0),
+                style: TextStyle(fontSize: 17.0),
               ),
               TextButton(
+                style: ButtonStyle(
+                  overlayColor:
+                      MaterialStateColor.resolveWith((states) => splashColor),
+                ),
                 onPressed: () => Navigator.of(context)
                     .pushNamedAndRemoveUntil(loginPage, (route) => false),
                 child: Text(
                   'Login here',
-                  style: TextStyle(color: Colors.blue, fontSize: 15.0),
+                  style: TextStyle(color: Colors.blue, fontSize: 17.0),
                 ),
               ),
             ],

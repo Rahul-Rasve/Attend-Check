@@ -29,9 +29,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Attend Check',
       theme: ThemeData(
+        fontFamily: 'JosefinSans',
         primarySwatch: Colors.red,
       ),
-      initialRoute: registerPage,
+      initialRoute: authPage,
       routes: {
         homePage: (context) => HomePage(),
         loginPage: (context) => KeyboardVisibilityProvider(

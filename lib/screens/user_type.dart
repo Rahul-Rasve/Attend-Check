@@ -66,14 +66,14 @@ class _UserTypeState extends State<UserType> {
                             setState(() {
                               isTeacher = true;
                             });
-                            Navigator.of(context, rootNavigator: true,).popAndPushNamed(loginPage);
+                            Navigator.of(context).pushNamed(loginPage);
                           },
                           style: buttonStyle(),
                           child: Text(
                             'Teacher Login',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 20.0,
+                              fontSize: 22.0,
                             ),
                           ),
                         ),
@@ -92,7 +92,7 @@ class _UserTypeState extends State<UserType> {
                             'Student Login',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 20.0,
+                              fontSize: 22.0,
                             ),
                           ),
                         ),

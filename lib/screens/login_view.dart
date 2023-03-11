@@ -105,6 +105,7 @@ class _LoginViewState extends State<LoginView> {
                     hintText: 'Enter your Password',
                     inputType: TextInputType.text,
                     iconData: Icons.lock_person_outlined,
+                    maxLength: 10,
                   ),
                 ),
               ],
@@ -164,14 +165,19 @@ class _LoginViewState extends State<LoginView> {
             children: [
               Text(
                 "Don't have an account?",
-                style: TextStyle(fontSize: 15.0),
+                style: TextStyle(fontSize: 17.0),
               ),
               TextButton(
-                onPressed: () => Navigator.of(context)
-                    .pushNamedAndRemoveUntil(registerPage, (route) => false),
+                style: ButtonStyle(
+                  overlayColor:
+                      MaterialStateColor.resolveWith((states) => splashColor),
+                ),
+                onPressed: () => Navigator.of(context).pushNamed(
+                  registerPage,
+                ),
                 child: Text(
                   'Sign Up here',
-                  style: TextStyle(color: Colors.blue, fontSize: 15.0),
+                  style: TextStyle(color: Colors.blue, fontSize: 17.0),
                 ),
               ),
             ],
