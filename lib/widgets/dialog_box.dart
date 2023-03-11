@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:attend_check/constants.dart';
+import 'package:attend_check/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 Future<void> showErrorDialog(BuildContext context, String message) {

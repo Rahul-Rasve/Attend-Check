@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
-import 'package:attend_check/constants.dart';
+import 'package:attend_check/utilities/constants.dart';
 import 'package:attend_check/authentication/auth_exceptions.dart';
 import 'package:attend_check/authentication/auth_services.dart';
 import 'package:attend_check/utilities/routes.dart';
@@ -77,46 +77,60 @@ class _LoginViewState extends State<LoginView> {
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+            margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
             child: Column(
               children: [
-                InputField(
-                  controllerName: userEmail,
-                  isObsecure: false,
-                  hintText: 'Enter your Email-Id',
-                  inputType: TextInputType.emailAddress,
+                Card(
+                  elevation: 5.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0)),
+                  child: InputField(
+                    controllerName: userEmail,
+                    isObsecure: false,
+                    hintText: 'Enter your Email-Id',
+                    inputType: TextInputType.emailAddress,
+                    iconData: Icons.email_outlined,
+                  ),
                 ),
                 SizedBox(
-                  height: 30.0,
+                  height: 20.0,
                 ),
-                InputField(
-                  controllerName: userPassword,
-                  isObsecure: true,
-                  hintText: 'Enter your Password',
-                  inputType: TextInputType.text,
+                Card(
+                  elevation: 5.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0)),
+                  child: InputField(
+                    controllerName: userPassword,
+                    isObsecure: true,
+                    hintText: 'Enter your Password',
+                    inputType: TextInputType.text,
+                    iconData: Icons.lock_person_outlined,
+                  ),
                 ),
               ],
             ),
           ),
-          SizedBox(
-            height: 10.0,
-          ),
           TextButton(
             onPressed: () async {
               try {
-                await AuthService.firebase().login(
-                  email: userEmail.text,
-                  password: userPassword.text,
-                );
-
-                final user = AuthService.firebase().currentUser;
-
-                if (user?.isEmailVerified == true) {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil(homePage, (route) => false);
+                if (userEmail.text.isEmpty || userPassword.text.isEmpty) {
+                  showErrorDialog(
+                      context, 'Please enter your login credentials.');
                 } else {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      verifyEmailPage, (route) => false);
+                  await AuthService.firebase().login(
+                    email: userEmail.text,
+                    password: userPassword.text,
+                  );
+
+                  final user = AuthService.firebase().currentUser;
+
+                  if (user?.isEmailVerified == true) {
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil(homePage, (route) => false);
+                  } else {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        verifyEmailPage, (route) => false);
+                  }
                 }
               } on UserNotFoundAuthException catch (_) {
                 await showErrorDialog(

@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables,
 
-import 'package:attend_check/constants.dart';
+import 'package:attend_check/utilities/constants.dart';
 import 'package:attend_check/utilities/routes.dart';
 import 'package:flutter/material.dart';
 

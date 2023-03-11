@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'package:attend_check/authentication/auth_exceptions.dart';
-import 'package:attend_check/constants.dart';
+import 'package:attend_check/utilities/constants.dart';
 import 'package:attend_check/authentication/auth_services.dart';
 import 'package:attend_check/utilities/routes.dart';
 import 'package:attend_check/widgets/dialog_box.dart';
@@ -79,32 +79,51 @@ class _RegisterViewState extends State<RegisterView> {
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
             child: Column(
               children: [
-                InputField(
-                  controllerName: userEmail,
-                  isObsecure: false,
-                  hintText: 'Enter your Email-Id',
-                  inputType: TextInputType.emailAddress,
+                Card(
+                  elevation: 5.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0)),
+                  child: InputField(
+                    controllerName: userEmail,
+                    isObsecure: false,
+                    hintText: 'Enter your Email-Id',
+                    inputType: TextInputType.emailAddress,
+                    iconData: Icons.email_outlined,
+                  ),
                 ),
                 SizedBox(
-                  height: 30.0,
+                  height: 20.0,
                 ),
-                InputField(
-                  controllerName: userPassword,
-                  isObsecure: true,
-                  hintText: 'Enter your Password',
-                  inputType: TextInputType.text,
+                Card(
+                  elevation: 5.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0)),
+                  child: InputField(
+                    controllerName: userPassword,
+                    isObsecure: true,
+                    hintText: 'Enter your Password',
+                    inputType: TextInputType.text,
+                    iconData: Icons.lock_person_outlined,
+                  ),
                 ),
                 SizedBox(
-                  height: 30.0,
+                  height: 20.0,
                 ),
-                InputField(
-                  controllerName: userConfirmPassword,
-                  isObsecure: true,
-                  hintText: 'Confirm your Password',
-                  inputType: TextInputType.text,
+                Card(
+                  elevation: 5.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: InputField(
+                    controllerName: userConfirmPassword,
+                    isObsecure: true,
+                    hintText: 'Confirm your Password',
+                    inputType: TextInputType.text,
+                    iconData: Icons.lock_person_outlined,
+                  ),
                 ),
               ],
             ),
@@ -112,17 +131,23 @@ class _RegisterViewState extends State<RegisterView> {
           TextButton(
             onPressed: () async {
               try {
-                if (userConfirmPassword.text == userPassword.text) {
-                  await AuthService.firebase().register(
-                    email: userEmail.text,
-                    password: userPassword.text,
-                  );
-
-                  AuthService.firebase().sendEmailVerification();
-
-                  Navigator.of(context).pushNamed(verifyEmailPage);
+                if (userEmail.text.isEmpty ||
+                    userPassword.text.isEmpty ||
+                    userConfirmPassword.text.isEmpty) {
+                  showErrorDialog(context, 'All fields are mandatory');
                 } else {
-                  showErrorDialog(context, 'Passwords don\'t match!');
+                  if (userConfirmPassword.text == userPassword.text) {
+                    await AuthService.firebase().register(
+                      email: userEmail.text,
+                      password: userPassword.text,
+                    );
+
+                    AuthService.firebase().sendEmailVerification();
+
+                    Navigator.of(context).pushNamed(verifyEmailPage);
+                  } else {
+                    showErrorDialog(context, 'Passwords don\'t match!');
+                  }
                 }
               } on WeakPasswordAuthException catch (_) {
                 await showErrorDialog(

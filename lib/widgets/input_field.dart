@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:attend_check/constants.dart';
+import 'package:attend_check/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget {
@@ -10,12 +10,14 @@ class InputField extends StatelessWidget {
     required this.isObsecure,
     required this.inputType,
     required this.hintText,
+    this.iconData,
   });
 
   final TextEditingController? controllerName;
   final bool isObsecure;
   final TextInputType? inputType;
   final String? hintText;
+  final IconData? iconData;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,11 @@ class InputField extends StatelessWidget {
       ),
       decoration: InputDecoration(
         hintText: hintText,
+        prefixIcon: Icon(
+          iconData,
+          color: Colors.black,
+          size: 30.0,
+        ),
         focusedBorder: OutlineInputBorder(
           gapPadding: 2.0,
           borderRadius: BorderRadius.circular(20.0),
