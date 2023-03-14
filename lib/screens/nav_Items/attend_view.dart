@@ -1,6 +1,6 @@
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class AttendancePage extends StatefulWidget {
   const AttendancePage({super.key});
@@ -12,6 +12,15 @@ class AttendancePage extends StatefulWidget {
 class _AttendancePageState extends State<AttendancePage> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('attendance'),);
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Text('Attendance'),
+        ),
+      ),
+    );
   }
 }

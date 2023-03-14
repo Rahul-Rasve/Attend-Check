@@ -5,6 +5,7 @@ import 'package:attend_check/authentication/auth_exceptions.dart';
 import 'package:attend_check/authentication/auth_services.dart';
 import 'package:attend_check/utilities/routes.dart';
 import 'package:attend_check/widgets/dialog_box.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
@@ -160,28 +161,50 @@ class _LoginViewState extends State<LoginView> {
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Don't have an account?",
-                style: TextStyle(fontSize: 17.0),
-              ),
-              TextButton(
-                style: ButtonStyle(
-                  overlayColor:
-                      MaterialStateColor.resolveWith((states) => splashColor),
-                ),
-                onPressed: () => Navigator.of(context).pushNamed(
-                  registerPage,
-                ),
-                child: Text(
-                  'Sign Up here',
-                  style: TextStyle(color: Colors.blue, fontSize: 17.0),
-                ),
-              ),
-            ],
+          SizedBox(
+            height: 10.0,
           ),
+          RichText(
+            text: TextSpan(
+              style: TextStyle(
+                fontSize: 17.0,
+                color: blackColor,
+              ),
+              children: <TextSpan>[
+                TextSpan(text: 'Don\'t have an account? '),
+                TextSpan(
+                  text: 'Sign Up here',
+                  style: TextStyle(
+                    color: Colors.blue,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => Navigator.of(context).pushNamed(
+                          registerPage,
+                        ),
+                ),
+              ],
+            ),
+          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Text(
+          //       "Don't have an account?",
+          //       style: TextStyle(fontSize: 17.0),
+          //     ),
+          //     TextButton(
+          //       style: ButtonStyle(
+          //         overlayColor:
+          //             MaterialStateColor.resolveWith((states) => splashColor),
+          //       ),
+          //       onPressed: () =>
+          //       child: Text(
+          //         'Sign Up here',
+          //         style: TextStyle(color: Colors.blue, fontSize: 17.0),
+          //       ),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

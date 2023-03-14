@@ -9,7 +9,9 @@ const Color splashColor = Color.fromARGB(95, 255, 255, 255);
 
 bool isTeacher = false;
 bool isStudent = false;
-bool isCalendarSelected = false;
+
+//navbar items
+bool isCalendarSelected = true; //since it is the landing page
 bool isAttendanceSelected = false;
 bool isProfileSelected = false;
 

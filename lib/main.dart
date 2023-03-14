@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import 'screens/register_view.dart';
+import 'screens/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'JosefinSans',
         primarySwatch: Colors.red,
       ),
-      initialRoute: homePage,
+      initialRoute: splashScreen,
       routes: {
         homePage: (context) => HomePage(),
         loginPage: (context) => KeyboardVisibilityProvider(
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         verifyEmailPage: (context) => VerifyEmailPage(),
         authPage: (context) => AuthPage(),
         userType: (context) => UserType(),
+        splashScreen: (context) => SplashScreen(),
       },
     );
   }

@@ -6,6 +6,7 @@ import 'package:attend_check/authentication/auth_services.dart';
 import 'package:attend_check/utilities/routes.dart';
 import 'package:attend_check/widgets/dialog_box.dart';
 import 'package:attend_check/widgets/input_field.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
@@ -183,27 +184,49 @@ class _RegisterViewState extends State<RegisterView> {
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Already have a account?",
-                style: TextStyle(fontSize: 17.0),
-              ),
-              TextButton(
-                style: ButtonStyle(
-                  overlayColor:
-                      MaterialStateColor.resolveWith((states) => splashColor),
-                ),
-                onPressed: () => Navigator.of(context)
-                    .pushNamedAndRemoveUntil(loginPage, (route) => false),
-                child: Text(
-                  'Login here',
-                  style: TextStyle(color: Colors.blue, fontSize: 17.0),
-                ),
-              ),
-            ],
+          SizedBox(
+            height: 10.0,
           ),
+          RichText(
+            text: TextSpan(
+              style: TextStyle(
+                fontSize: 17.0,
+                color: blackColor,
+              ),
+              children: <TextSpan>[
+                TextSpan(text: 'Already have an account? '),
+                TextSpan(
+                  text: 'Login here',
+                  style: TextStyle(
+                    color: Colors.blue,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => Navigator.of(context)
+                        .pushNamedAndRemoveUntil(loginPage, (route) => false),
+                ),
+              ],
+            ),
+          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Text(
+          //       "Already have a account?",
+          //       style: TextStyle(fontSize: 17.0),
+          //     ),
+          //     TextButton(
+          //       style: ButtonStyle(
+          //         overlayColor:
+          //             MaterialStateColor.resolveWith((states) => splashColor),
+          //       ),
+          //       onPressed: () =>
+          //       child: Text(
+          //         'Login here',
+          //         style: TextStyle(color: Colors.blue, fontSize: 17.0),
+          //       ),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

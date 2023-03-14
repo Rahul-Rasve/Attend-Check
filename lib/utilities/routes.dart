@@ -4,3 +4,4 @@ String registerPage = '/register';
 String verifyEmailPage = '/verifyEmail';
 String authPage = '/authPage';
 String userType = '/userType';
+String splashScreen = '/splash';
