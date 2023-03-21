@@ -43,169 +43,171 @@ class _LoginViewState extends State<LoginView> {
         KeyboardVisibilityProvider.isKeyboardVisible(context);
 
     return Scaffold(
-      body: Column(
-        children: [
-          isKeyboardVisibile
-              ? SizedBox(
-                  //to eliminate pixel overflow
-                  height: screenHeight / 15,
-                )
-              : Container(
-                  height: screenHeight / 2.5,
-                  decoration: BoxDecoration(
-                    color: primary,
-                    borderRadius: BorderRadius.horizontal(
-                      left: Radius.circular(20.0),
-                      right: Radius.circular(20.0),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            isKeyboardVisibile
+                ? SizedBox(
+                    //to eliminate pixel overflow
+                    height: screenHeight / 15,
+                  )
+                : Container(
+                    height: screenHeight / 2.5,
+                    decoration: BoxDecoration(
+                      color: primary,
+                      borderRadius: BorderRadius.horizontal(
+                        left: Radius.circular(20.0),
+                        right: Radius.circular(20.0),
+                      ),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.person_pin_rounded,
+                        color: secondary,
+                        size: screenHeight / 7,
+                      ),
                     ),
                   ),
-                  child: Center(
-                    child: Icon(
-                      Icons.person_pin_rounded,
-                      color: secondary,
-                      size: screenHeight / 7,
-                    ),
-                  ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 30.0),
+              child: Text(
+                'Login',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  color: Colors.black,
                 ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 30.0),
-            child: Text(
-              'Login',
-              style: TextStyle(
-                fontSize: 25.0,
-                color: Colors.black,
               ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
-            child: Column(
-              children: [
-                Card(
-                  elevation: 5.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
-                  child: InputField(
-                    controllerName: userEmail,
-                    isObsecure: false,
-                    hintText: 'Enter your Email-Id',
-                    inputType: TextInputType.emailAddress,
-                    iconData: Icons.email_outlined,
+            Container(
+              margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
+              child: Column(
+                children: [
+                  Card(
+                    elevation: 5.0,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)),
+                    child: InputField(
+                      controllerName: userEmail,
+                      isObsecure: false,
+                      hintText: 'Enter your Email-Id',
+                      inputType: TextInputType.emailAddress,
+                      iconData: Icons.email_outlined,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Card(
-                  elevation: 5.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
-                  child: InputField(
-                    controllerName: userPassword,
-                    isObsecure: true,
-                    hintText: 'Enter your Password',
-                    inputType: TextInputType.text,
-                    iconData: Icons.lock_person_outlined,
-                    maxLength: 10,
+                  SizedBox(
+                    height: 20.0,
                   ),
-                ),
-              ],
+                  Card(
+                    elevation: 5.0,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)),
+                    child: InputField(
+                      controllerName: userPassword,
+                      isObsecure: true,
+                      hintText: 'Enter your Password',
+                      inputType: TextInputType.text,
+                      iconData: Icons.lock_person_outlined,
+                      maxLength: 10,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          TextButton(
-            onPressed: () async {
-              try {
-                if (userEmail.text.isEmpty || userPassword.text.isEmpty) {
-                  showErrorDialog(
-                      context, 'Please enter your login credentials.');
-                } else {
-                  await AuthService.firebase().login(
-                    email: userEmail.text,
-                    password: userPassword.text,
-                  );
-
-                  final user = AuthService.firebase().currentUser;
-
-                  if (user?.isEmailVerified == true) {
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil(homePage, (route) => false);
+            TextButton(
+              onPressed: () async {
+                try {
+                  if (userEmail.text.isEmpty || userPassword.text.isEmpty) {
+                    showErrorDialog(
+                        context, 'Please enter your login credentials.');
                   } else {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        verifyEmailPage, (route) => false);
+                    await AuthService.firebase().login(
+                      email: userEmail.text,
+                      password: userPassword.text,
+                    );
+
+                    final user = AuthService.firebase().currentUser;
+
+                    if (user?.isEmailVerified == true) {
+                      Navigator.of(context)
+                          .pushNamedAndRemoveUntil(homePage, (route) => false);
+                    } else {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          verifyEmailPage, (route) => false);
+                    }
                   }
+                } on UserNotFoundAuthException catch (_) {
+                  await showErrorDialog(
+                    context,
+                    'User not found!',
+                  );
+                } on WrongPasswordAuthException catch (_) {
+                  await showErrorDialog(
+                    context,
+                    'Wrong password! Try again.',
+                  );
+                } on GenericAuthException catch (_) {
+                  await showErrorDialog(
+                    context,
+                    'Authentication Error!',
+                  );
                 }
-              } on UserNotFoundAuthException catch (_) {
-                await showErrorDialog(
-                  context,
-                  'User not found!',
-                );
-              } on WrongPasswordAuthException catch (_) {
-                await showErrorDialog(
-                  context,
-                  'Wrong password! Try again.',
-                );
-              } on GenericAuthException catch (_) {
-                await showErrorDialog(
-                  context,
-                  'Authentication Error!',
-                );
-              }
-            },
-            style: buttonStyle(),
-            child: Text(
-              'LOGIN',
-              style: TextStyle(
-                fontSize: 20.0,
-                letterSpacing: 2,
-                color: secondary,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          RichText(
-            text: TextSpan(
-              style: TextStyle(
-                fontSize: 17.0,
-                color: blackColor,
-              ),
-              children: <TextSpan>[
-                TextSpan(text: 'Don\'t have an account? '),
-                TextSpan(
-                  text: 'Sign Up here',
-                  style: TextStyle(
-                    color: Colors.blue,
-                  ),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => Navigator.of(context).pushNamed(
-                          registerPage,
-                        ),
+              },
+              style: buttonStyle(),
+              child: Text(
+                'LOGIN',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  letterSpacing: 2,
+                  color: secondary,
                 ),
-              ],
+              ),
             ),
-          ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     Text(
-          //       "Don't have an account?",
-          //       style: TextStyle(fontSize: 17.0),
-          //     ),
-          //     TextButton(
-          //       style: ButtonStyle(
-          //         overlayColor:
-          //             MaterialStateColor.resolveWith((states) => splashColor),
-          //       ),
-          //       onPressed: () =>
-          //       child: Text(
-          //         'Sign Up here',
-          //         style: TextStyle(color: Colors.blue, fontSize: 17.0),
-          //       ),
-          //     ),
-          //   ],
-          // ),
-        ],
+            SizedBox(
+              height: 10.0,
+            ),
+            RichText(
+              text: TextSpan(
+                style: TextStyle(
+                  fontSize: 17.0,
+                  color: blackColor,
+                ),
+                children: <TextSpan>[
+                  TextSpan(text: 'Don\'t have an account? '),
+                  TextSpan(
+                    text: 'Sign Up here',
+                    style: TextStyle(
+                      color: Colors.blue,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => Navigator.of(context).pushNamed(
+                            registerPage,
+                          ),
+                  ),
+                ],
+              ),
+            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Text(
+            //       "Don't have an account?",
+            //       style: TextStyle(fontSize: 17.0),
+            //     ),
+            //     TextButton(
+            //       style: ButtonStyle(
+            //         overlayColor:
+            //             MaterialStateColor.resolveWith((states) => splashColor),
+            //       ),
+            //       onPressed: () =>
+            //       child: Text(
+            //         'Sign Up here',
+            //         style: TextStyle(color: Colors.blue, fontSize: 17.0),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+          ],
+        ),
       ),
     );
   }

@@ -45,189 +45,191 @@ class _RegisterViewState extends State<RegisterView> {
         KeyboardVisibilityProvider.isKeyboardVisible(context);
 
     return Scaffold(
-      body: Column(
-        children: [
-          isKeyboardVisibile
-              ? SizedBox(
-                  //to eliminate pixel overflow
-                  height: screenHeight / 18,
-                )
-              : Container(
-                  height: screenHeight / 2.5,
-                  decoration: BoxDecoration(
-                    color: primary,
-                    borderRadius: BorderRadius.horizontal(
-                      left: Radius.circular(20.0),
-                      right: Radius.circular(20.0),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            isKeyboardVisibile
+                ? SizedBox(
+                    //to eliminate pixel overflow
+                    height: screenHeight / 18,
+                  )
+                : Container(
+                    height: screenHeight / 2.5,
+                    decoration: BoxDecoration(
+                      color: primary,
+                      borderRadius: BorderRadius.horizontal(
+                        left: Radius.circular(20.0),
+                        right: Radius.circular(20.0),
+                      ),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.person_pin_rounded,
+                        color: secondary,
+                        size: screenHeight / 7,
+                      ),
                     ),
                   ),
-                  child: Center(
-                    child: Icon(
-                      Icons.person_pin_rounded,
-                      color: secondary,
-                      size: screenHeight / 7,
-                    ),
-                  ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 20.0),
+              child: Text(
+                'Sign Up',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  color: Colors.black,
                 ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 20.0),
-            child: Text(
-              'Sign Up',
-              style: TextStyle(
-                fontSize: 25.0,
-                color: Colors.black,
               ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
-            child: Column(
-              children: [
-                Card(
-                  elevation: 5.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
-                  child: InputField(
-                    controllerName: userEmail,
-                    isObsecure: false,
-                    hintText: 'Enter your Email-Id',
-                    inputType: TextInputType.emailAddress,
-                    iconData: Icons.email_outlined,
+            Container(
+              margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
+              child: Column(
+                children: [
+                  Card(
+                    elevation: 5.0,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)),
+                    child: InputField(
+                      controllerName: userEmail,
+                      isObsecure: false,
+                      hintText: 'Enter your Email-Id',
+                      inputType: TextInputType.emailAddress,
+                      iconData: Icons.email_outlined,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Card(
-                  elevation: 5.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
-                  child: InputField(
-                    controllerName: userPassword,
-                    isObsecure: true,
-                    hintText: 'Enter your Password',
-                    inputType: TextInputType.text,
-                    iconData: Icons.lock_person_outlined,
-                    maxLength: 10,
+                  SizedBox(
+                    height: 20.0,
                   ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Card(
-                  elevation: 5.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                  Card(
+                    elevation: 5.0,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)),
+                    child: InputField(
+                      controllerName: userPassword,
+                      isObsecure: true,
+                      hintText: 'Enter your Password',
+                      inputType: TextInputType.text,
+                      iconData: Icons.lock_person_outlined,
+                      maxLength: 10,
+                    ),
                   ),
-                  child: InputField(
-                    controllerName: userConfirmPassword,
-                    isObsecure: true,
-                    hintText: 'Confirm your Password',
-                    inputType: TextInputType.text,
-                    iconData: Icons.lock_person_outlined,
-                    maxLength: 10,
+                  SizedBox(
+                    height: 20.0,
                   ),
-                ),
-              ],
+                  Card(
+                    elevation: 5.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: InputField(
+                      controllerName: userConfirmPassword,
+                      isObsecure: true,
+                      hintText: 'Confirm your Password',
+                      inputType: TextInputType.text,
+                      iconData: Icons.lock_person_outlined,
+                      maxLength: 10,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          TextButton(
-            onPressed: () async {
-              try {
-                if (userEmail.text.isEmpty ||
-                    userPassword.text.isEmpty ||
-                    userConfirmPassword.text.isEmpty) {
-                  showErrorDialog(context, 'All fields are mandatory');
-                } else {
-                  if (userConfirmPassword.text == userPassword.text) {
-                    await AuthService.firebase().register(
-                      email: userEmail.text,
-                      password: userPassword.text,
-                    );
-
-                    AuthService.firebase().sendEmailVerification();
-
-                    Navigator.of(context).pushNamed(verifyEmailPage);
+            TextButton(
+              onPressed: () async {
+                try {
+                  if (userEmail.text.isEmpty ||
+                      userPassword.text.isEmpty ||
+                      userConfirmPassword.text.isEmpty) {
+                    showErrorDialog(context, 'All fields are mandatory');
                   } else {
-                    showErrorDialog(context, 'Passwords don\'t match!');
+                    if (userConfirmPassword.text == userPassword.text) {
+                      await AuthService.firebase().register(
+                        email: userEmail.text,
+                        password: userPassword.text,
+                      );
+
+                      AuthService.firebase().sendEmailVerification();
+
+                      Navigator.of(context).pushNamed(verifyEmailPage);
+                    } else {
+                      showErrorDialog(context, 'Passwords don\'t match!');
+                    }
                   }
+                } on WeakPasswordAuthException catch (_) {
+                  await showErrorDialog(
+                    context,
+                    'Weak Password',
+                  );
+                } on EmailAlreadyInUseAuthException catch (_) {
+                  await showErrorDialog(
+                    context,
+                    'Email already in use, try signing in.',
+                  );
+                } on InvalidEmailAuthException catch (_) {
+                  await showErrorDialog(
+                    context,
+                    'Invalid Email!',
+                  );
+                } on GenericAuthException catch (_) {
+                  await showErrorDialog(
+                    context,
+                    'Failed to register!',
+                  );
                 }
-              } on WeakPasswordAuthException catch (_) {
-                await showErrorDialog(
-                  context,
-                  'Weak Password',
-                );
-              } on EmailAlreadyInUseAuthException catch (_) {
-                await showErrorDialog(
-                  context,
-                  'Email already in use, try signing in.',
-                );
-              } on InvalidEmailAuthException catch (_) {
-                await showErrorDialog(
-                  context,
-                  'Invalid Email!',
-                );
-              } on GenericAuthException catch (_) {
-                await showErrorDialog(
-                  context,
-                  'Failed to register!',
-                );
-              }
-            },
-            style: buttonStyle(),
-            child: Text(
-              'SIGN UP',
-              style: TextStyle(
-                fontSize: 20.0,
-                color: secondary,
-                letterSpacing: 2.0,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          RichText(
-            text: TextSpan(
-              style: TextStyle(
-                fontSize: 17.0,
-                color: blackColor,
-              ),
-              children: <TextSpan>[
-                TextSpan(text: 'Already have an account? '),
-                TextSpan(
-                  text: 'Login here',
-                  style: TextStyle(
-                    color: Colors.blue,
-                  ),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => Navigator.of(context)
-                        .pushNamedAndRemoveUntil(loginPage, (route) => false),
+              },
+              style: buttonStyle(),
+              child: Text(
+                'SIGN UP',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: secondary,
+                  letterSpacing: 2.0,
                 ),
-              ],
+              ),
             ),
-          ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     Text(
-          //       "Already have a account?",
-          //       style: TextStyle(fontSize: 17.0),
-          //     ),
-          //     TextButton(
-          //       style: ButtonStyle(
-          //         overlayColor:
-          //             MaterialStateColor.resolveWith((states) => splashColor),
-          //       ),
-          //       onPressed: () =>
-          //       child: Text(
-          //         'Login here',
-          //         style: TextStyle(color: Colors.blue, fontSize: 17.0),
-          //       ),
-          //     ),
-          //   ],
-          // ),
-        ],
+            SizedBox(
+              height: 10.0,
+            ),
+            RichText(
+              text: TextSpan(
+                style: TextStyle(
+                  fontSize: 17.0,
+                  color: blackColor,
+                ),
+                children: <TextSpan>[
+                  TextSpan(text: 'Already have an account? '),
+                  TextSpan(
+                    text: 'Login here',
+                    style: TextStyle(
+                      color: Colors.blue,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => Navigator.of(context)
+                          .pushNamedAndRemoveUntil(loginPage, (route) => false),
+                  ),
+                ],
+              ),
+            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Text(
+            //       "Already have a account?",
+            //       style: TextStyle(fontSize: 17.0),
+            //     ),
+            //     TextButton(
+            //       style: ButtonStyle(
+            //         overlayColor:
+            //             MaterialStateColor.resolveWith((states) => splashColor),
+            //       ),
+            //       onPressed: () =>
+            //       child: Text(
+            //         'Login here',
+            //         style: TextStyle(color: Colors.blue, fontSize: 17.0),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+          ],
+        ),
       ),
     );
   }
