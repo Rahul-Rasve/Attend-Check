@@ -7,6 +7,7 @@ class AuthService implements AuthProvider {
 
   AuthService(this.provider);
 
+  //create AuthService object from FirebaseAuthProvider
   factory AuthService.firebase() => AuthService(FirebaseAuthProvider());
 
   @override
@@ -31,13 +32,13 @@ class AuthService implements AuthProvider {
 
   @override
   AuthUser? get currentUser => provider.currentUser;
-  
+
   @override
   Future<void> sendEmailVerification() => provider.sendEmailVerification();
-  
+
   @override
   Future<void> initialize() => provider.initialize();
-  
+
   @override
   Future<void> logout() => provider.logout();
 }
