@@ -135,17 +135,17 @@ class _LoginViewState extends State<LoginView> {
                           verifyEmailPage, (route) => false);
                     }
                   }
-                } on UserNotFoundAuthException catch (_) {
+                } on UserNotFoundAuthException {
                   await showErrorDialog(
                     context,
                     'User not found!',
                   );
-                } on WrongPasswordAuthException catch (_) {
+                } on WrongPasswordAuthException {
                   await showErrorDialog(
                     context,
                     'Wrong password! Try again.',
                   );
-                } on GenericAuthException catch (_) {
+                } on GenericAuthException {
                   await showErrorDialog(
                     context,
                     'Authentication Error!',
@@ -186,26 +186,6 @@ class _LoginViewState extends State<LoginView> {
                 ],
               ),
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     Text(
-            //       "Don't have an account?",
-            //       style: TextStyle(fontSize: 17.0),
-            //     ),
-            //     TextButton(
-            //       style: ButtonStyle(
-            //         overlayColor:
-            //             MaterialStateColor.resolveWith((states) => splashColor),
-            //       ),
-            //       onPressed: () =>
-            //       child: Text(
-            //         'Sign Up here',
-            //         style: TextStyle(color: Colors.blue, fontSize: 17.0),
-            //       ),
-            //     ),
-            //   ],
-            // ),
           ],
         ),
       ),

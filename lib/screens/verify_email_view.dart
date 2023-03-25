@@ -86,7 +86,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                   onPressed: () async {
                     AuthService.firebase().logout();
                     Navigator.of(context)
-                        .pushNamedAndRemoveUntil(loginPage, (route) => false);
+                        .pushNamedAndRemoveUntil(loginPage, (route) => false,);
                   },
                   style: TextButton.styleFrom(
                     fixedSize: Size(150.0, 50.0),

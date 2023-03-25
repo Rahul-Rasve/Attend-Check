@@ -153,22 +153,22 @@ class _RegisterViewState extends State<RegisterView> {
                       showErrorDialog(context, 'Passwords don\'t match!');
                     }
                   }
-                } on WeakPasswordAuthException catch (_) {
+                } on WeakPasswordAuthException {
                   await showErrorDialog(
                     context,
                     'Weak Password',
                   );
-                } on EmailAlreadyInUseAuthException catch (_) {
+                } on EmailAlreadyInUseAuthException {
                   await showErrorDialog(
                     context,
                     'Email already in use, try signing in.',
                   );
-                } on InvalidEmailAuthException catch (_) {
+                } on InvalidEmailAuthException {
                   await showErrorDialog(
                     context,
                     'Invalid Email!',
                   );
-                } on GenericAuthException catch (_) {
+                } on GenericAuthException {
                   await showErrorDialog(
                     context,
                     'Failed to register!',
@@ -202,32 +202,15 @@ class _RegisterViewState extends State<RegisterView> {
                       color: Colors.blue,
                     ),
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () => Navigator.of(context)
-                          .pushNamedAndRemoveUntil(loginPage, (route) => false),
+                      ..onTap =
+                          () => Navigator.of(context).pushNamedAndRemoveUntil(
+                                loginPage,
+                                (route) => false,
+                              ),
                   ),
                 ],
               ),
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     Text(
-            //       "Already have a account?",
-            //       style: TextStyle(fontSize: 17.0),
-            //     ),
-            //     TextButton(
-            //       style: ButtonStyle(
-            //         overlayColor:
-            //             MaterialStateColor.resolveWith((states) => splashColor),
-            //       ),
-            //       onPressed: () =>
-            //       child: Text(
-            //         'Login here',
-            //         style: TextStyle(color: Colors.blue, fontSize: 17.0),
-            //       ),
-            //     ),
-            //   ],
-            // ),
           ],
         ),
       ),

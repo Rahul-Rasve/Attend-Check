@@ -17,8 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      duration: 0,
-      animationDuration: Duration(milliseconds: 1000),
+      duration: 500,
+      animationDuration: Duration(milliseconds: 2000),
       splash: Container(
         width: 150,
         decoration: BoxDecoration(
