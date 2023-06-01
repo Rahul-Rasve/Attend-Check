@@ -19,13 +19,11 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  late final TextEditingController userPassword;
-  late final TextEditingController userEmail;
+  TextEditingController userPassword = TextEditingController();
+  TextEditingController userEmail = TextEditingController();
 
   @override
   void initState() {
-    userEmail = TextEditingController();
-    userPassword = TextEditingController();
     super.initState();
   }
 

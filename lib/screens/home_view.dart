@@ -39,8 +39,8 @@ class _HomePageState extends State<HomePage> {
           bottom: 10.0,
         ),
         color: primary,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(screenHeight / 25)),
         child: SizedBox(
           height: screenHeight / 12,
           child: Row(
